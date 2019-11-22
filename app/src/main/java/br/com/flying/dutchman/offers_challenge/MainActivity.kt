@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.flying.dutchman.offers_challenge.model.ApiResponse
 import com.google.gson.Gson
 import io.reactivex.Observable
@@ -19,7 +20,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val adapter by lazy {
-        OfferAdapter()
+        OfferAdapter {
+
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +61,16 @@ class MainActivity : AppCompatActivity() {
             }
             .subscribe(
                 { offers ->
-                    adapter.items = offers
+                    adapter.items += offers
+                    adapter.items += offers
+                    adapter.items += offers
+                    adapter.items += offers
+                    adapter.items += offers
+                    adapter.items += offers
                     adapter.notifyDataSetChanged()
 
-                }, {
+                },
+                {
 
                 }
             )
@@ -73,13 +82,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         activity_offers_recycler_view
             .apply {
-                layoutManager = GridLayoutManager(context, 1)
+                layoutManager =
+                    LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
                 addItemDecoration(
                     MarginItemDecoration(
-                        resources.getDimension(R.dimen.default_padding).toInt()
+                        resources.getDimension(R.dimen.activity_vertical_margin).toInt()
                     )
                 )
-                setHasFixedSize(true)
+//                setHasFixedSize(true)
                 adapter = this@MainActivity.adapter
             }
     }

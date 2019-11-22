@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             tools:itemCount="10"
             tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/view_holder_offer"
+            tools:listitem="@layout/view_holder_offer_banner"
             tools:visibility="visible" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
