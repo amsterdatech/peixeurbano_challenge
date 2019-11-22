@@ -26,15 +26,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        activity_offers_recycler_view.apply {
-            layoutManager = GridLayoutManager(context, 1)
-            addItemDecoration(MarginItemDecoration(
-                resources.getDimension(R.dimen.default_padding).toInt()))
-            setHasFixedSize(true)
-            adapter = this@MainActivity.adapter
-        }
+        setupRecyclerView()
+        loadOffersFromAssets()
+    }
 
-
+    private fun loadOffersFromAssets() {
         Observable
             .defer {
                 Observable
@@ -60,15 +56,31 @@ class MainActivity : AppCompatActivity() {
             .doOnComplete {
                 activity_offers_loading.visibility = View.GONE
             }
-            .subscribe({ offers ->
-                adapter.items = offers
-                adapter.notifyDataSetChanged()
+            .subscribe(
+                { offers ->
+                    adapter.items = offers
+                    adapter.notifyDataSetChanged()
 
-            }, {
+                }, {
 
-            })
+                }
+            )
             .apply {
                 compositeDisposable.add(this)
+            }
+    }
+
+    private fun setupRecyclerView() {
+        activity_offers_recycler_view
+            .apply {
+                layoutManager = GridLayoutManager(context, 1)
+                addItemDecoration(
+                    MarginItemDecoration(
+                        resources.getDimension(R.dimen.default_padding).toInt()
+                    )
+                )
+                setHasFixedSize(true)
+                adapter = this@MainActivity.adapter
             }
     }
 }
