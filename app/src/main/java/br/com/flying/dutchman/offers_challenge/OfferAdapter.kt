@@ -12,8 +12,8 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
 
     companion object {
 
-        const val BANNER_TYPE = 0
-        const val LIST_ITEM_TYPE = 1
+        const val BANNER_TYPE = 1
+        const val LIST_ITEM_TYPE = 0
 
     }
 
@@ -24,20 +24,21 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
             BANNER_TYPE -> {
                 ViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.view_holder_offer_list_item,
+                        R.layout.view_holder_offer_banner,
                         parent,
                         false
-                    )
+                    ),
+                    viewType
                 )
             }
 
             LIST_ITEM_TYPE -> {
                 ViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.view_holder_offer_banner,
+                        R.layout.view_holder_offer_list_item,
                         parent,
                         false
-                    )
+                    ), viewType
                 )
             }
 
@@ -47,7 +48,7 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
                         R.layout.view_holder_offer_list_item,
                         parent,
                         false
-                    )
+                    ), viewType
                 )
             }
         }
@@ -56,7 +57,7 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
     override fun getItemCount(): Int = items.size
 
     override fun getItemViewType(position: Int): Int {
-        if (position % 6 != 0) {
+        if (position % 6 == 0 || position == 0) {
             return BANNER_TYPE
         }
 
@@ -71,13 +72,19 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
     }
 
 
-    class ViewHolder(var containerView: View) :
+    class ViewHolder(var containerView: View, var type: Int = LIST_ITEM_TYPE) :
         RecyclerView.ViewHolder(containerView) {
 
         fun bind(
             item: Offer
         ) {
-            containerView.offer_thumb.load(item.thumb)
+
+            if (type == BANNER_TYPE) {
+                containerView.offer_thumb.load(item.images[0].image)
+            } else {
+                containerView.offer_thumb.load(item.images[0].thumb)
+            }
+
             containerView.offer_title.text = item.title
             containerView.offer_description.text = item.description
             containerView.offer_price.text = item.price

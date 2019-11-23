@@ -42,7 +42,9 @@ class MainActivity : AppCompatActivity() {
                     .flatMap { apiResponse ->
                         return@flatMap Observable.just(apiResponse.response.map {
                             Offer(
-                                it.images[0].image,
+                                it.images.map { image ->
+                                    Image(image.image, image.original, image.thumb)
+                                },
                                 it.partner.name,
                                 it.shortTitle,
                                 it.salePrice.formatForBrazilianCurrency()
@@ -68,7 +70,6 @@ class MainActivity : AppCompatActivity() {
                     adapter.items += offers
                     adapter.items += offers
                     adapter.notifyDataSetChanged()
-
                 },
                 {
 
