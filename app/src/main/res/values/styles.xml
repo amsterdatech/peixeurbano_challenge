@@ -8,11 +8,11 @@
 
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
 
-<!--        <item name="android:textColorPrimary">@color/textPrimaryColor</item>-->
-<!--        <item name="android:textColorSecondary">@color/textSecondaryColor</item>-->
+        <!--        <item name="android:textColorPrimary">@color/textPrimaryColor</item>-->
+        <!--        <item name="android:textColorSecondary">@color/textSecondaryColor</item>-->
 
 
-<!--        <item name="android:windowBackground">@color/colorWindowBackground</item>-->
+        <!--        <item name="android:windowBackground">@color/colorWindowBackground</item>-->
         <item name="windowActionModeOverlay">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -24,5 +24,14 @@
     <style name="Theme.BrandedLaunch" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/layer_list_branded</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

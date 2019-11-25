@@ -1,10 +1,11 @@
-package br.com.flying.dutchman.offers_challenge
+package br.com.flying.dutchman.offers_challenge.presentation
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import br.com.flying.dutchman.offers_challenge.R
 
 class SplashActivity : AppCompatActivity() {
 
@@ -19,7 +20,8 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed(
             {
                 goToSearchResultsActivity(this)
-            }, SPLASH_DURATION
+            },
+            SPLASH_DURATION
         )
     }
 

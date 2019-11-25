@@ -1,11 +1,12 @@
-package br.com.flying.dutchman.offers_challenge
+package br.com.flying.dutchman.offers_challenge.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.flying.dutchman.offers_challenge.App
+import br.com.flying.dutchman.offers_challenge.R
+import br.com.flying.dutchman.offers_challenge.formatForBrazilianCurrency
 import br.com.flying.dutchman.offers_challenge.model.ApiResponse
 import com.google.gson.Gson
 import io.reactivex.Observable
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val adapter by lazy {
         OfferAdapter {
-
+            startActivity(OfferDetailActivity.createIntent(this, it))
         }
     }
 
@@ -43,7 +44,11 @@ class MainActivity : AppCompatActivity() {
                         return@flatMap Observable.just(apiResponse.response.map {
                             Offer(
                                 it.images.map { image ->
-                                    Image(image.image, image.original, image.thumb)
+                                    Image(
+                                        image.image,
+                                        image.original,
+                                        image.thumb
+                                    )
                                 },
                                 it.partner.name,
                                 it.shortTitle,
