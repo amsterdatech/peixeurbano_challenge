@@ -68,13 +68,15 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        val item = items[position]
+        holder.bind(item)
+
         holder.containerView.custom_view_offer_content_root.setOnClickListener {
-            action.invoke(items[position])
+            action.invoke(item)
         }
 
         holder.containerView.offer_thumb?.setOnClickListener {
-            action.invoke(items[position])
+            action.invoke(item)
         }
     }
 
@@ -86,19 +88,21 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
         RecyclerView.ViewHolder(containerView) {
 
         fun bind(
-            item: Offer
+            item: Offer, randomImage: Int = (0 until item.images.size).random()
         ) {
 
+            item.imageSelected = randomImage
             if (type == BANNER_TYPE) {
-                containerView.offer_thumb.load(item.images[0].image)
+                containerView.offer_thumb.load(item.images[randomImage].image)
             } else {
-                containerView.offer_thumb.load(item.images[0].thumb)
+                containerView.offer_thumb.load(item.images[randomImage].thumb)
             }
 
             containerView.offer_title.text = item.title
             containerView.offer_description.text = item.description
             containerView.offer_price.text = item.price
         }
+
 
     }
 }

@@ -5,32 +5,37 @@ import android.os.Parcelable
 
 data class Offer(
     val images: List<Image>,
+    var imageSelected: Int = 0,
     val title: String,
     val description: String,
     val price: String,
     val fullPrice: String,
     val soldUnits: Int,
-    val review: Review
+    val review: Review,
+    val details: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createTypedArrayList(Image),
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
-        parcel.readParcelable(Review::class.java.classLoader)
-    ) {
-    }
+        parcel.readParcelable(Review::class.java.classLoader),
+        parcel.readString()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeTypedList(images)
+        parcel.writeInt(imageSelected)
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(price)
         parcel.writeString(fullPrice)
         parcel.writeInt(soldUnits)
         parcel.writeParcelable(review, flags)
+        parcel.writeString(details)
     }
 
     override fun describeContents(): Int {

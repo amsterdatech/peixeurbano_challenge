@@ -1,15 +1,17 @@
 package br.com.flying.dutchman.offers_challenge.ui.offers_list
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.flying.dutchman.offers_challenge.App
 import br.com.flying.dutchman.offers_challenge.R
-import br.com.flying.dutchman.offers_challenge.ui.commons.formatForBrazilianCurrency
 import br.com.flying.dutchman.offers_challenge.model.ApiResponse
-import br.com.flying.dutchman.offers_challenge.ui.*
+import br.com.flying.dutchman.offers_challenge.ui.Image
+import br.com.flying.dutchman.offers_challenge.ui.Offer
+import br.com.flying.dutchman.offers_challenge.ui.Review
 import br.com.flying.dutchman.offers_challenge.ui.commons.MarginItemDecoration
+import br.com.flying.dutchman.offers_challenge.ui.commons.formatForBrazilianCurrency
 import br.com.flying.dutchman.offers_challenge.ui.detail.OfferDetailActivity
 import com.google.gson.Gson
 import io.reactivex.Observable
@@ -68,7 +70,12 @@ class MainActivity : AppCompatActivity() {
             }
             .subscribe(
                 { offers ->
+                    /* TODO in order to simulate many items from api
+                       TODO It should use swipe to refresh or some expire contraint base on time
+                     */
                     adapter.items += offers
+                    adapter.items += offers.shuffled()
+                    adapter.items += offers.shuffled()
                     adapter.notifyDataSetChanged()
                 },
                 {
@@ -89,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                     image.thumb
                 )
             },
+            0,
             it.partner.name,
             it.shortTitle,
             it.salePrice.formatForBrazilianCurrency(),
@@ -97,7 +105,9 @@ class MainActivity : AppCompatActivity() {
             Review(
                 it.partner.review.reviewsCount,
                 it.partner.review.score
-            )
+            ),
+            it.details
+
         )
     }
 
