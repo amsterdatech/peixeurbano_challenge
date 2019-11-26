@@ -1,11 +1,12 @@
-package br.com.flying.dutchman.offers_challenge.presentation
+package br.com.flying.dutchman.offers_challenge.ui.offers_list
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.flying.dutchman.offers_challenge.R
-import br.com.flying.dutchman.offers_challenge.load
+import br.com.flying.dutchman.offers_challenge.ui.commons.load
+import br.com.flying.dutchman.offers_challenge.ui.Offer
 import kotlinx.android.synthetic.main.view_holder_offer_banner.view.*
 import kotlin.properties.Delegates
 

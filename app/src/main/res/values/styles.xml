@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+<!--        <item name="colorControlHighlight">@color/colorControlHighlight</item>-->
 
         <!--        <item name="android:textColorPrimary">@color/textPrimaryColor</item>-->
         <!--        <item name="android:textColorSecondary">@color/textSecondaryColor</item>-->

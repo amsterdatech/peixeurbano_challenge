@@ -1,4 +1,4 @@
-package br.com.flying.dutchman.offers_challenge.presentation
+package br.com.flying.dutchman.offers_challenge.ui.commons
 
 import android.graphics.Rect
 import android.view.View

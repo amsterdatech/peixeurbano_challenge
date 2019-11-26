@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".presentation.OfferDetailActivity">
+    tools:context=".ui.detail.OfferDetailActivity">
 
     <include layout="@layout/include_toolbar_collapsing_offer_detail" />
+
     <include layout="@layout/custom_loading_progress_bar" />
 
     <androidx.core.widget.NestedScrollView
@@ -20,6 +21,18 @@
             layout="@layout/offer_detail_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/state_vector_favourite_btn" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

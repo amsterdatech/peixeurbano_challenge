@@ -9,13 +9,14 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/offer_detail_descriptions"
-        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/offer_detail_sold_units"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,23 +25,25 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/offer_detail_sold_units"
-        style="@style/TextAppearance.AppCompat.Subhead"
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:textColor="@android:color/black"
+        android:textAllCaps="true"
+        android:textColor="@color/steel"
         app:layout_constraintBottom_toTopOf="@+id/offer_detail_reviews"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="36 vendidos" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/offer_detail_reviews"
-        style="@style/TextAppearance.AppCompat.Body1"
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/steel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         tools:text="750 reviews (4,75)" />
@@ -54,8 +57,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/offer_detail_sold_units"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/offer_detail_sold_units"
+        app:layout_constraintVertical_bias="0.32999998"
         tools:text="@sample/offers.json/data/sale_price" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -64,10 +69,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black_80"
+        app:layout_constraintBottom_toBottomOf="@+id/offer_detail_reviews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/offer_detail_price"
-        app:layout_constraintTop_toBottomOf="@+id/offer_detail_price"
+        app:layout_constraintTop_toTopOf="@+id/offer_detail_reviews"
         tools:text="@sample/offers.json/data/sale_price" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -78,12 +84,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@android:color/black"
+        android:text="@string/large_text"
+        android:textColor="@color/black_80"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/offer_detail_full_price"
-        tools:text="@string/large_text"
-        android:text="@string/large_text"/>
+        tools:text="@string/large_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package br.com.flying.dutchman.offers_challenge.presentation
+package br.com.flying.dutchman.offers_challenge.ui.offers_list
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,8 +6,11 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.flying.dutchman.offers_challenge.App
 import br.com.flying.dutchman.offers_challenge.R
-import br.com.flying.dutchman.offers_challenge.formatForBrazilianCurrency
+import br.com.flying.dutchman.offers_challenge.ui.commons.formatForBrazilianCurrency
 import br.com.flying.dutchman.offers_challenge.model.ApiResponse
+import br.com.flying.dutchman.offers_challenge.ui.*
+import br.com.flying.dutchman.offers_challenge.ui.commons.MarginItemDecoration
+import br.com.flying.dutchman.offers_challenge.ui.detail.OfferDetailActivity
 import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     private val adapter by lazy {
         OfferAdapter {
-            startActivity(OfferDetailActivity.createIntent(this, it))
+            startActivity(
+                OfferDetailActivity.createIntent(
+                    this,
+                    it
+                )
+            )
         }
     }
 
@@ -45,11 +53,12 @@ class MainActivity : AppCompatActivity() {
                         return@flatMap Observable.just(apiResponse.response.map {
                             mapper(it)
                         })
+                            .subscribeOn(Schedulers.computation())
 
                     }
 
             }
-            .debounce(1,TimeUnit.SECONDS)
+            .debounce(2, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 activity_offers_loading.visibility = View.VISIBLE

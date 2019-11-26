@@ -1,4 +1,4 @@
-package br.com.flying.dutchman.offers_challenge.presentation
+package br.com.flying.dutchman.offers_challenge.ui
 
 import android.os.Parcel
 import android.os.Parcelable

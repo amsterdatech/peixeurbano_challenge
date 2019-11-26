@@ -1,4 +1,4 @@
-package br.com.flying.dutchman.offers_challenge.presentation
+package br.com.flying.dutchman.offers_challenge.ui.detail
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import br.com.flying.dutchman.offers_challenge.*
+import br.com.flying.dutchman.offers_challenge.ui.Offer
+import br.com.flying.dutchman.offers_challenge.ui.commons.formatDecimal
+import br.com.flying.dutchman.offers_challenge.ui.commons.load
+import br.com.flying.dutchman.offers_challenge.ui.commons.spannable
+import br.com.flying.dutchman.offers_challenge.ui.commons.strike
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.include_toolbar_collapsing_offer_detail.*
 import kotlinx.android.synthetic.main.offer_detail_content.*
@@ -81,9 +86,10 @@ class OfferDetailActivity : AppCompatActivity() {
                 offer_detail_sold_units.visibility = View.GONE
             }
 
-            offer_detail_full_price.text = spannable {
-                strike(it.fullPrice)
-            }
+            offer_detail_full_price.text =
+                spannable {
+                    strike(it.fullPrice)
+                }
             offer_detail_price.text = it.price
         }
     }

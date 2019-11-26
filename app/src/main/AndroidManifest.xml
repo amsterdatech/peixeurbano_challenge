@@ -14,16 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.OfferDetailActivity"
+            android:name=".ui.detail.OfferDetailActivity"
             android:label=""
-            android:parentActivityName=".presentation.MainActivity"
+            android:parentActivityName=".ui.offers_list.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.flying.dutchman.offers_challenge.presentation.MainActivity" />
+                android:value="br.com.flying.dutchman.offers_challenge.ui.offers_list.MainActivity" />
         </activity>
         <activity
-            android:name=".presentation.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BrandedLaunch">
             <intent-filter>
@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.MainActivity" />
+        <activity android:name=".ui.offers_list.MainActivity" />
     </application>
 
 </manifest>
