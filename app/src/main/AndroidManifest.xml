@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.OfferDetailActivity"
-            android:label="@string/title_activity_offer_detail"
+            android:label=""
             android:parentActivityName=".presentation.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

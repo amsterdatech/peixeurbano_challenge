@@ -71,10 +71,17 @@ class OfferAdapter(private val action: (Offer) -> Unit? = {}) :
         holder.containerView.custom_view_offer_content_root.setOnClickListener {
             action.invoke(items[position])
         }
+
+        holder.containerView.offer_thumb?.setOnClickListener {
+            action.invoke(items[position])
+        }
     }
 
 
-    class ViewHolder(var containerView: View, var type: Int = LIST_ITEM_TYPE) :
+    class ViewHolder(
+        var containerView: View,
+        var type: Int = LIST_ITEM_TYPE
+    ) :
         RecyclerView.ViewHolder(containerView) {
 
         fun bind(
