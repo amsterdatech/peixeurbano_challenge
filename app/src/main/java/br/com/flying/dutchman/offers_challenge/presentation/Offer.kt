@@ -7,20 +7,30 @@ data class Offer(
     val images: List<Image>,
     val title: String,
     val description: String,
-    val price: String
+    val price: String,
+    val fullPrice: String,
+    val soldUnits: Int,
+    val review: Review
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.createTypedArrayList(Image),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
-    )
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt(),
+        parcel.readParcelable(Review::class.java.classLoader)
+    ) {
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeTypedList(images)
         parcel.writeString(title)
         parcel.writeString(description)
         parcel.writeString(price)
+        parcel.writeString(fullPrice)
+        parcel.writeInt(soldUnits)
+        parcel.writeParcelable(review, flags)
     }
 
     override fun describeContents(): Int {
@@ -37,6 +47,37 @@ data class Offer(
         }
     }
 
+
+}
+
+data class Review(
+    val reviewsCount: Int,
+    val score: Double
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readDouble()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(reviewsCount)
+        parcel.writeDouble(score)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Review> {
+        override fun createFromParcel(parcel: Parcel): Review {
+            return Review(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Review?> {
+            return arrayOfNulls(size)
+        }
+    }
 
 }
 
@@ -71,3 +112,5 @@ data class Image(
         }
     }
 }
+
+

@@ -15,6 +15,8 @@ class App : Application() {
                     it.readText()
                 }
         }
+
+
     }
 
     override fun onCreate() {

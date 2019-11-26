@@ -16,6 +16,10 @@ data class Offer(
     @SerializedName("sold_out")
     val soldOut: Boolean,
     @SerializedName("sale_price")
-    val salePrice: Double
+    val salePrice: Double,
+    @SerializedName("full_price")
+    val fullPrice: Double,
+    @SerializedName("sold_units")
+    val soldUnits: Int
 
 )

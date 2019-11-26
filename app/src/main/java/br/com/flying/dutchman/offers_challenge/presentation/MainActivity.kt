@@ -14,6 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private val compositeDisposable: CompositeDisposable by lazy {
@@ -42,23 +43,13 @@ class MainActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.io())
                     .flatMap { apiResponse ->
                         return@flatMap Observable.just(apiResponse.response.map {
-                            Offer(
-                                it.images.map { image ->
-                                    Image(
-                                        image.image,
-                                        image.original,
-                                        image.thumb
-                                    )
-                                },
-                                it.partner.name,
-                                it.shortTitle,
-                                it.salePrice.formatForBrazilianCurrency()
-                            )
+                            mapper(it)
                         })
 
                     }
 
             }
+            .debounce(1,TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 activity_offers_loading.visibility = View.VISIBLE
@@ -69,11 +60,6 @@ class MainActivity : AppCompatActivity() {
             .subscribe(
                 { offers ->
                     adapter.items += offers
-                    adapter.items += offers
-                    adapter.items += offers
-                    adapter.items += offers
-                    adapter.items += offers
-                    adapter.items += offers
                     adapter.notifyDataSetChanged()
                 },
                 {
@@ -83,6 +69,27 @@ class MainActivity : AppCompatActivity() {
             .apply {
                 compositeDisposable.add(this)
             }
+    }
+
+    private fun mapper(it: br.com.flying.dutchman.offers_challenge.model.Offer): Offer {
+        return Offer(
+            it.images.map { image ->
+                Image(
+                    image.image,
+                    image.original,
+                    image.thumb
+                )
+            },
+            it.partner.name,
+            it.shortTitle,
+            it.salePrice.formatForBrazilianCurrency(),
+            it.fullPrice.formatForBrazilianCurrency(),
+            it.soldUnits,
+            Review(
+                it.partner.review.reviewsCount,
+                it.partner.review.score
+            )
+        )
     }
 
     private fun setupRecyclerView() {

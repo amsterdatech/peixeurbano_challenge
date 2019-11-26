@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/offer_detail_descriptions"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/offer_detail_sold_units"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@sample/offers.json/data/short_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/offer_detail_sold_units"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/offer_detail_reviews"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="36 vendidos" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/offer_detail_reviews"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:text="750 reviews (4,75)" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/offer_detail_price"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/offer_detail_sold_units"
+        tools:text="@sample/offers.json/data/sale_price" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/offer_detail_full_price"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/offer_detail_price"
+        app:layout_constraintTop_toBottomOf="@+id/offer_detail_price"
+        tools:text="@sample/offers.json/data/sale_price" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/details"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offer_detail_full_price"
+        tools:text="@string/large_text"
+        android:text="@string/large_text"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    
