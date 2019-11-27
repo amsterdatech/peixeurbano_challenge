@@ -1,4 +1,4 @@
-package br.com.flying.dutchman.offers_challenge.model
+package br.com.flying.dutchman.offers_challenge.data.model
 
 import com.google.gson.annotations.SerializedName
 

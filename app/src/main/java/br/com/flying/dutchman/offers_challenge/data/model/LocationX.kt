@@ -1,8 +1,8 @@
-package br.com.flying.dutchman.offers_challenge.model
+package br.com.flying.dutchman.offers_challenge.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Partner(
+data class LocationX(
     @SerializedName("account_id")
     val accountId: String,
     @SerializedName("additional_address_info")
@@ -21,10 +21,20 @@ data class Partner(
     val companyName: String,
     @SerializedName("description")
     val description: String,
+    @SerializedName("distance")
+    val distance: String,
+    @SerializedName("distanceLong")
+    val distanceLong: Int,
     @SerializedName("formatted_url")
     val formattedUrl: String,
     @SerializedName("image")
     val image: String,
+    @SerializedName("lat")
+    val lat: Double,
+    @SerializedName("lng")
+    val lng: Double,
+    @SerializedName("location")
+    val location: Location,
     @SerializedName("name")
     val name: String,
     @SerializedName("neighborhood")
@@ -37,8 +47,10 @@ data class Partner(
     val phoneNumber: String,
     @SerializedName("place_name")
     val placeName: String,
-    @SerializedName("review")
-    val review: Review,
+    @SerializedName("refDistance")
+    val refDistance: String,
+    @SerializedName("refDistanceLong")
+    val refDistanceLong: Int,
     @SerializedName("state")
     val state: String,
     @SerializedName("website")

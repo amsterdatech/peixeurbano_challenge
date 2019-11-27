@@ -1,8 +1,8 @@
-package br.com.flying.dutchman.offers_challenge.model
+package br.com.flying.dutchman.offers_challenge.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Wed(
+data class Thu(
     @SerializedName("end")
     val end: String,
     @SerializedName("end_minutes")
