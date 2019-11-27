@@ -29,7 +29,7 @@ class OfferDetailActivity : AppCompatActivity() {
 
     companion object {
 
-        private const val OFFER = "offer"
+         const val OFFER = "offer"
 
         @JvmStatic
         fun createIntent(context: Context, offer: Offer): Intent {

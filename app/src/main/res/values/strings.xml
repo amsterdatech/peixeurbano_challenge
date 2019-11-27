@@ -93,4 +93,6 @@
     <string name="action_settings">Settings</string>
     <string name="menu_favorite">favourite</string>
     <string name="menu_share">share</string>
+    <string name="error_message">Try again later</string>
+    <string name="retry">Retry</string>
 </resources>
