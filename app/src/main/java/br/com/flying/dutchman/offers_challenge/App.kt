@@ -1,10 +1,7 @@
 package br.com.flying.dutchman.offers_challenge
 
 import android.app.Application
-import br.com.flying.dutchman.offers_challenge.di.apiModule
-import br.com.flying.dutchman.offers_challenge.di.databaseModule
-import br.com.flying.dutchman.offers_challenge.di.netModule
-import br.com.flying.dutchman.offers_challenge.di.repositoryModule
+import br.com.flying.dutchman.offers_challenge.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -32,9 +29,7 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             androidLogger(Level.DEBUG)
-            modules(listOf(repositoryModule, netModule, apiModule, databaseModule))
+            modules(listOf(viewModelModule, repositoryModule, netModule, apiModule, databaseModule))
         }
     }
-
-
 }

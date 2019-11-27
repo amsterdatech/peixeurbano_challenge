@@ -4,11 +4,13 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import br.com.flying.dutchman.data.remote.OfferRemoteEntityMapper
+import br.com.flying.dutchman.domain.OfferMapper
 import br.com.flying.dutchman.offers_challenge.BuildConfig
 import br.com.flying.dutchman.offers_challenge.data.OfferRepository
 import br.com.flying.dutchman.offers_challenge.data.local.OfferDao
 import br.com.flying.dutchman.offers_challenge.data.local.OffersDatabase
 import br.com.flying.dutchman.offers_challenge.data.network.OfferApi
+import br.com.flying.dutchman.offers_challenge.ui.offers_list.OfferListViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -18,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -25,9 +28,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-//    val viewModelModule = module {
-//        single { UserViewModel(get()) }
-//    }
+val viewModelModule = module {
+
+    fun provideOfferMapper(): OfferMapper {
+        return OfferMapper()
+    }
+
+    single { provideOfferMapper() }
+
+    viewModel { OfferListViewModel(get(), get()) }
+}
 
 
 val apiModule = module {

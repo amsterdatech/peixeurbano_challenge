@@ -1,30 +1,21 @@
 package br.com.flying.dutchman.offers_challenge.ui.offers_list
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.flying.dutchman.domain.OfferMapper
 import br.com.flying.dutchman.offers_challenge.R
-import br.com.flying.dutchman.offers_challenge.data.OfferRepository
+import br.com.flying.dutchman.offers_challenge.ui.Offer
+import br.com.flying.dutchman.offers_challenge.ui.ViewState
 import br.com.flying.dutchman.offers_challenge.ui.commons.MarginItemDecoration
 import br.com.flying.dutchman.offers_challenge.ui.detail.OfferDetailActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
-    private val compositeDisposable: CompositeDisposable by lazy {
-        CompositeDisposable()
-    }
+class MainActivity : AppCompatActivity(), LifecycleOwner {
 
-    val mapper by lazy {
-        OfferMapper()
-    }
-
-
-    val repository: OfferRepository by inject()
+    private val viewModel: OfferListViewModel by viewModel()
 
     private val adapter by lazy {
         OfferAdapter {
@@ -41,41 +32,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupRecyclerView()
-        loadOffersFromAssets()
-    }
+        viewModel.viewState().observe(this, Observer {
 
-    private fun loadOffersFromAssets() {
-        repository
-            .getOffer()
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                activity_offers_loading.visibility = View.VISIBLE
-            }
-            .doOnSuccess {
-                activity_offers_loading.visibility = View.GONE
-            }
-            .doOnError {
-                activity_offers_loading.visibility = View.GONE
-            }
-            .subscribe(
-                { offers ->
-                    /* TODO in order to simulate many items from api
-                       TODO It should use swipe to refresh or some expire contraint base on time
-                     */
-                    adapter.items += offers.map {
-                        mapper.mapFromEntity(it)
-                    }
+            when (it.status) {
+                ViewState.Status.SUCCESS -> {
+                    adapter.items += it.data as List<Offer>
                     adapter.notifyDataSetChanged()
-                },
-                {
+                }
+
+                else -> {
 
                 }
-            )
-            .apply {
-                compositeDisposable.add(this)
             }
+
+        })
+        lifecycle.addObserver(viewModel)
+        setupRecyclerView()
     }
+
 
     private fun setupRecyclerView() {
         activity_offers_recycler_view
@@ -87,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                         resources.getDimension(R.dimen.activity_vertical_margin).toInt()
                     )
                 )
-//                setHasFixedSize(true)
                 adapter = this@MainActivity.adapter
             }
     }
